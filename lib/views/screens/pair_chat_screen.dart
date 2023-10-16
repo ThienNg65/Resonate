@@ -9,9 +9,9 @@ import '../../controllers/pair_chat_controller.dart';
 import '../../utils/constants.dart';
 
 class PairChatScreen extends StatelessWidget {
-  // AuthStateController authStateController = Get.find<AuthStateController>();
+  AuthStateController authStateController = Get.find<AuthStateController>();
 
-  // PairChatController controller = Get.find<PairChatController>();
+  PairChatController controller = Get.find<PairChatController>();
 
   PairChatScreen({super.key});
 
@@ -67,10 +67,10 @@ class PairChatScreen extends StatelessWidget {
                               children: [
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                    // controller.isAnonymous.value
-                                    //     ? userProfileImagePlaceholderUrl
-                                    //     : authStateController.profileImageUrl!,
-                                    userProfileImagePlaceholderUrl,
+                                    controller.isAnonymous.value
+                                        ? userProfileImagePlaceholderUrl
+                                        : authStateController.profileImageUrl!,
+                                    // userProfileImagePlaceholderUrl,
                                   ),
                                   radius: UiSizes.width_66,
                                 ),
@@ -81,10 +81,10 @@ class PairChatScreen extends StatelessWidget {
                                   alignment: Alignment.center,
                                   width: UiSizes.width_100,
                                   child: Text(
-                                    // controller.isAnonymous.value
-                                    //     ? "User1"
-                                    //     : authStateController.userName!,
-                                    "User1",
+                                    controller.isAnonymous.value
+                                        ? "User1"
+                                        : authStateController.userName!,
+                                    // "User1",
                                     style: TextStyle(
                                       fontSize: UiSizes.size_16,
                                       color: Colors.black,
@@ -111,10 +111,11 @@ class PairChatScreen extends StatelessWidget {
                               children: [
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                      // controller.isAnonymous.value
-                                      //     ? userProfileImagePlaceholderUrl
-                                      //     : controller.pairProfileImageUrl!,
-                                      userProfileImagePlaceholderUrl),
+                                    controller.isAnonymous.value
+                                        ? userProfileImagePlaceholderUrl
+                                        : controller.pairProfileImageUrl!,
+                                    // userProfileImagePlaceholderUrl
+                                  ),
                                   radius: UiSizes.width_66,
                                 ),
                                 SizedBox(
@@ -124,10 +125,10 @@ class PairChatScreen extends StatelessWidget {
                                   alignment: Alignment.center,
                                   width: UiSizes.width_100,
                                   child: Text(
-                                    // controller.isAnonymous.value
-                                    //     ? "User2"
-                                    //     : controller.pairUsername!,
-                                    "User2",
+                                    controller.isAnonymous.value
+                                        ? "User2"
+                                        : controller.pairUsername!,
+                                    // "User2",
                                     style: TextStyle(
                                       fontSize: UiSizes.size_16,
                                       color: Colors.black,
@@ -155,108 +156,111 @@ class PairChatScreen extends StatelessWidget {
                     ? Colors.amber[100]
                     : Colors.black,
                 height: UiSizes.height_131,
-                // child: Obx(() {
-                //   return
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
+                child: Obx(
+                  () {
+                    return
+                        // child:
+                        Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(
-                          height: UiSizes.height_56,
-                          width: UiSizes.width_56,
-                          child: FloatingActionButton(
-                            elevation: 0,
-                            heroTag: "mic",
-                            onPressed: () {
-                              // controller.toggleMic();
-                            },
-                            backgroundColor:
-                                // controller.isMicOn.value
-                                //   ? currentBrightness == Brightness.light
-                                //       ? Colors.white
-                                //       : Colors.white54
-                                //   : Colors.amber,
-                                Colors.amber,
-                            child: Icon(
-                              Icons.mic_off,
-                              size: UiSizes.size_24,
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: UiSizes.height_56,
+                              width: UiSizes.width_56,
+                              child: FloatingActionButton(
+                                elevation: 0,
+                                heroTag: "mic",
+                                onPressed: () {
+                                  controller.toggleMic();
+                                },
+                                backgroundColor: controller.isMicOn.value
+                                    ? currentBrightness == Brightness.light
+                                        ? Colors.white
+                                        : Colors.white54
+                                    : Colors.amber,
+                                // Colors.amber,
+                                child: Icon(
+                                  Icons.mic_off,
+                                  size: UiSizes.size_24,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: UiSizes.height_4,
-                        ),
-                        Text(
-                          'Mute',
-                          style: TextStyle(fontSize: UiSizes.height_14),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: UiSizes.height_56,
-                          width: UiSizes.width_56,
-                          child: FloatingActionButton(
-                            elevation: 0,
-                            heroTag: "speaker",
-                            onPressed: () {
-                              // controller.toggleLoudSpeaker();
-                            },
-                            backgroundColor:
-                                // controller.isLoudSpeakerOn.value
-                                //   ? Colors.amber
-                                //   : currentBrightness == Brightness.light
-                                //       ? Colors.white
-                                //       : Colors.white54,
-                                Colors.white54,
-                            child: Icon(
-                              Icons.volume_up,
-                              size: UiSizes.size_24,
+                            SizedBox(
+                              height: UiSizes.height_4,
                             ),
-                          ),
+                            Text(
+                              'Mute',
+                              style: TextStyle(fontSize: UiSizes.height_14),
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          height: UiSizes.height_4,
-                        ),
-                        Text(
-                          'Speaker',
-                          style: TextStyle(fontSize: UiSizes.height_14),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: UiSizes.height_56,
-                          width: UiSizes.width_56,
-                          child: FloatingActionButton(
-                            elevation: 0,
-                            heroTag: "end-chat",
-                            onPressed: () async {
-                              // await controller.endChat();
-                            },
-                            backgroundColor: Colors.redAccent,
-                            child: Icon(
-                              Icons.cancel_outlined,
-                              size: UiSizes.size_24,
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: UiSizes.height_56,
+                              width: UiSizes.width_56,
+                              child: FloatingActionButton(
+                                elevation: 0,
+                                heroTag: "speaker",
+                                onPressed: () {
+                                  controller.toggleLoudSpeaker();
+                                },
+                                backgroundColor:
+                                    controller.isLoudSpeakerOn.value
+                                        ? Colors.amber
+                                        : currentBrightness == Brightness.light
+                                            ? Colors.white
+                                            : Colors.white54,
+                                // Colors.white54,
+                                child: Icon(
+                                  Icons.volume_up,
+                                  size: UiSizes.size_24,
+                                ),
+                              ),
                             ),
-                          ),
+                            SizedBox(
+                              height: UiSizes.height_4,
+                            ),
+                            Text(
+                              'Speaker',
+                              style: TextStyle(fontSize: UiSizes.height_14),
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          height: UiSizes.height_4,
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: UiSizes.height_56,
+                              width: UiSizes.width_56,
+                              child: FloatingActionButton(
+                                elevation: 0,
+                                heroTag: "end-chat",
+                                onPressed: () async {
+                                  await controller.endChat();
+                                },
+                                backgroundColor: Colors.redAccent,
+                                child: Icon(
+                                  Icons.cancel_outlined,
+                                  size: UiSizes.size_24,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: UiSizes.height_4,
+                            ),
+                            Text(
+                              "End",
+                              style: TextStyle(fontSize: UiSizes.height_14),
+                            )
+                          ],
                         ),
-                        Text(
-                          "End",
-                          style: TextStyle(fontSize: UiSizes.height_14),
-                        )
                       ],
-                    ),
-                  ],
+                    );
+                    // }),
+                  },
                 ),
-                // }),
-              )
+              ),
             ],
           ),
         ),

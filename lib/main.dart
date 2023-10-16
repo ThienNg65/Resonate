@@ -28,15 +28,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeController = Get.put(ThemeController());
 
-    // return GetMaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   title: 'Resonate',
-    //   theme: Themes.lightTheme,
-    //   darkTheme: Themes.darkTheme,
-    //   themeMode: themeController.theme,
-    //   initialRoute: AppRoutes.splash,
-    //   getPages: AppPages.pages,
-    // );
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Resonate',
@@ -44,7 +35,17 @@ class MyApp extends StatelessWidget {
       darkTheme: Themes.darkTheme,
       themeMode: themeController.theme,
       initialRoute: AppRoutes.splash,
-      home: PairChatScreen(),
+      getPages: AppPages.pages,
     );
+
+    // return GetMaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   title: 'Resonate',
+    //   theme: Themes.lightTheme,
+    //   darkTheme: Themes.darkTheme,
+    //   themeMode: themeController.theme,
+    //   initialRoute: AppRoutes.splash,
+    //   home: PairChatScreen(),
+    // );
   }
 }
